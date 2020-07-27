@@ -62,6 +62,7 @@ namespace Assets.Scripts {
                 { StringComparisonExpression.XmlName, (typeof(StringComparisonExpression), () => new StringComparisonExpression()) },
                 { StringTransformExpression.XmlName, (typeof(StringTransformExpression), () => new StringTransformExpression()) },
                 { StringSplitExpression.XmlName, (typeof(StringSplitExpression), () => new StringSplitExpression()) },
+                { StagingInformationExpression.XmlName, (typeof(StagingInformationExpression), () => new StagingInformationExpression()) }
             };
 
             var programNodeCreatorType =
