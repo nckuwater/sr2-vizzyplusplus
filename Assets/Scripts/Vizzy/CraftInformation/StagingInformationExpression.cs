@@ -31,20 +31,19 @@ namespace Assets.Scripts.Vizzy.CraftInformation{
                         NumberValue = context.Craft.CraftScript.ActiveCommandPod.NumStages
                     };
                 case(StagingInformationType.Parts):
-                    /// List<string>
                     List<string> partlist = new List<string>();
-                    /// real stage number = (total - index) due to stage of ActivecommandPod will be 1.
-                    //int selectedStage = context.Craft.CraftScript.ActiveCommandPod.NumStages - (int)GetExpression(0).Evaluate(context).NumberValue;
                     int selectedStage = (int)GetExpression(0).Evaluate(context).NumberValue;
                     //Debug.Log($"selected stage= {selectedStage}");
-                    //foreach(IPartGroupScript partGroup in context.Craft.CraftScript.RootPart.BodyScript.PartGroups){
-                    string partStr;
+                    string partIdString;
                     foreach(PartData part in context.Craft.CraftScript.Data.Assembly.Parts){
-                        Debug.Log(part.ActivationStage);
-                        if (part.ActivationStage == selectedStage){
-                            partStr = (Convert.ToString(part.Id)).Trim();
-                            Debug.Log($"match {partStr}");
-                            partlist.Add(partStr);
+                        //Debug.Log(part.ActivationStage);
+                        if (part.ActivationStage == selectedStage && part.Config.SupportsActivation){
+                            partIdString = (Convert.ToString(part.Id)).Trim();
+                            Debug.Log($"match {selectedStage} {partIdString}");
+                            partlist.Add(partIdString);
+                        }else if(part.ActivationStage == 0 && selectedStage == -1){
+                            partIdString = (Convert.ToString(part.Id)).Trim();
+                            partlist.Add(partIdString);
                         }
                     }
 
